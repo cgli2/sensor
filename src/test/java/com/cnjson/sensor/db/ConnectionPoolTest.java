@@ -1,6 +1,5 @@
 package com.cnjson.sensor.db;
 
-import java.sql.Connection;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -17,9 +16,12 @@ public class ConnectionPoolTest extends TestCase {
 
 	}
 
-	public void testConnection() {
-		Connection conn = ConnectionPool.getInstance().getConnection();
-		assertNotNull(conn);
+	public void testGetInstance() {
+		assertNotNull(ConnectionPool.getInstance());
+	}
+
+	 public void testConnection() {
+		assertNotNull( ConnectionPool.getInstance().getConnection());
 	}
 
 	public static void main(String[] args) {

@@ -17,51 +17,35 @@ public class ByteUtilsTest extends TestCase {
 		return new TestSuite(ByteUtilsTest.class);
 	}
 
-	public void testInt2Byte() {
+	public void testInt2Bytes() {
 		int data = 450;
 		byte[] b1 = ByteUtils.getBytes(data);
-		// byte[] b2 = ByteUtils.intToBytes(data);
-		for (int i = 0; i < b1.length; i++) {
-			System.out.println(b1[i]);
-			// assertTrue(b1[i]==b2[i]);
-		}
 		assertNotNull(b1);
 	}
 
-	public void testShort2Byte() {
+	public void testShort2Bytes() {
 		short data = 11;
 		byte[] b1 = ByteUtils.getBytes(data);
-		// byte[] b2 = ByteUtils.shortToByte(data);
-		for (int i = 0; i < b1.length; i++) {
-			System.out.println(b1[i]);
-			// assertTrue(b1[i]==b2[i]);
-		}
 		assertNotNull(b1);
 	}
 
-	public void testFormat() {
-		String tt = "44B5586c";
-		// Float v = Float.intBitsToFloat(Integer.valueOf(tt, 16));
+	public void testBytes2Hex() {
+		String tt = "44B5586C";
 		byte[] barray = ByteUtils.hexStringToBytes(tt);
-		for (byte b : barray) {
-			int l = b & 0x0ff;
-			//System.out.println(l);
-			String temp = Integer.toHexString(l);
-			//System.out.println(temp);
-			int ll = Integer.valueOf(temp, 16);
-			//assertTrue(ll>0);
-			//System.out.println(ll);
-		}
-
-		int ii = ByteUtils.getInt(barray);
-		assertTrue(ii>0);
-
-		Float vv = ByteUtils.bytesToFloat(barray);
-		System.out.println(vv);
-
-		Float v2 = ByteUtils.getFloat(barray);
-		System.out.println(v2);
-		assertNotSame(vv,v2);
+		assertNotNull(barray);
+		String hex = ByteUtils.bytesToHexString(barray);
+		//System.out.println(hex);
+		assertEquals(hex.toUpperCase(),tt);
+	}
+	
+	public void testByte2Float(){
+		String tt = "44B5586C";
+		byte[] barray = ByteUtils.hexStringToBytes(tt);
+		Float expected = ByteUtils.bytesToFloat(barray);
+		//System.out.println(expected);
+		float actual = Float.intBitsToFloat(Integer.valueOf(tt, 16));
+		float delta = 0.5f;
+		assertEquals(expected, actual, delta);
 	}
 
 	public static void main(String[] args) {
